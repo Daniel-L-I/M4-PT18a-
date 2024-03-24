@@ -1,0 +1,38 @@
+-- SELECT* FROM movies
+--  SELECT * FROM movies WHERE year=1999;
+-- ! ¿Cómo sería el comando para obtener todas aquellas películas que tengan una duración menor a 90 minutos? En total son 9 películas que cumplen esta condición.
+-- SELECT* FROM movies WHERE duration < 90
+-- ! ¿Cómo sería el comando para obtener todas aquellas películas creadas entre el año 1930 y 1940? En total son 4 películas que cumplen esta condición.
+-- SELECT * FROM movies 
+-- WHERE year BETWEEN 1930 AND 1940
+-- *SELECT * FROM movies WHERE year BETWEEN 1930 AND 1940
+--! ¿Cómo sería el comando para obtener todas aquellas películas que tengan en su titulo el substring 'til'? En total son 3 películas que cumplen esta condición.
+-- SELECT * FROM movies
+-- WHERE title ILIKE '%TIL%'
+-- *SELECT * FROM movies WHERE LOWER(title) ILIKE '%til%';
+--! ¿Cómo sería el comando para obtener todas aquellas películas que tengan sólo 1 actor en su propiedad actors? En total son 27 películas que cumplen esta condición.
+-- SELECT * FROM movies WHERE cardinality(actors) = 1
+-- *SELECT * FROM movies
+-- *WHERE array_length(actors, 1) = 1;
+-- ! ¿Cómo sería el comando para obtener el título de cada película, incluyendo el promedio de todas sus puntuaciones de rating? Recuerda que "rating" es una propiedad de la tabla movies, y es un arreglo de números.
+-- SELECT
+--     title,
+--     (
+--         SELECT
+--             AVG(rating)
+--         FROM
+--             unnest (m.ratings) AS rating
+--     ) AS average_rating
+-- FROM
+--     movies AS m;
+--* SELECT m.title,(SELECT AVG(rating) FROM unnest(m.ratings) AS rating) AS average_rating FROM movies AS m;
+-- ! ¿Cómo sería el comando para obtener a los actores de aquellas películas que incluyan en su nombre el string "Fast and", pero que también sean del año 2016? En total serán dos filas con nombres de actores.
+-- SELECT
+--     actors
+-- FROM
+--     movies
+-- WHERE
+--     title LIKE "%Fast%"
+--     AND year = 2016;
+
+
